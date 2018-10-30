@@ -1,3 +1,13 @@
+<?php
+
+include "connection.php";
+$tot = 0;
+$res = mysqli_query($link,"select * from message where dusername='$_SESSION[username]'&& read1='n'");
+$tot=mysqli_num_rows($res);
+
+?>	
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>LCMS</title>
+    <title> LCMS </title>
 
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -22,7 +32,7 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="#" class="site_title"><span>LCMS</span></a>
+                    <a href="#" class="site_title"></> <span>LCMS</span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -30,12 +40,12 @@
                 <!-- menu profile quick info -->
                 <div class="profile clearfix">
                     <!--<div class="profile_pic">
-                        <img src="" alt="..." class="img-circle profile_img">
+                        <img src="" alt="" class="">
                     </div>-->
                     <div class="profile_info">
                         <span>WELCOME</span>
 
-                        <h2><?php echo "Mr.";echo " ";echo $_SESSION["librarian"];?></h2>
+                        <h2><?php echo "Mr.";echo " ";echo $_SESSION["username"];?></h2>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -48,30 +58,15 @@
                     <div class="menu_section">
                         <h3>GENERAL</h3>
                         <ul class="nav side-menu">
-                            <li><a href = "display_student_info.php"><i class="fa fa-info"></i> All students info <span class="fa fa-chevron-down"></span></a>
+                            <li><a href = "my_issued_components.php"><i class="fa fa-book"></i> My Record <span class="fa fa-chevron-down"></span></a>
 
                             </li>
-                            <li><a href = "add_component.php"><i class="fa fa-edit"></i> Add Components <span class="fa fa-chevron-down"></span></a>
+                            <li><a href = "search_c.php" ><i class="fa fa-search"></i> Search Component <span class="fa fa-chevron-down"></span></a>
 
                             </li>
-                            <li><a href = "display_components.php"><i class="fa fa-desktop"></i> Display Components <span
-                                        class="fa fa-chevron-down"></span></a>
-
-                            </li>
-                            <li><a href = "issue_component.php"><i class="fa fa-check-circle-o"></i> Issue Components <span class="fa fa-chevron-down"></span></a>
-
-                            </li>
-							</li>
-                            <li><a href = "return_components.php"><i class="fa fa-mail-reply"></i> Return Components <span class="fa fa-chevron-down"></span></a>
-
-                            </li>
-							</li>
-                            <li><a href = "component_details_with_student.php"><i class="fa fa-table"></i> student record <span class="fa fa-chevron-down"></span></a>
-
-                            </li>
-							<li><a href = "send_notification.php"><i class="fa fa-mail-forward"></i> Send Message To Student <span class="fa fa-chevron-down"></span></a>
-
-                            </li>
+                            <li><a href = "message_from_admin.php"><i class="fa fa-mail-forward"></i> notifications <span class="fa fa-chevron-down"></span></a>
+                             </li>
+                           
 
                         </ul>
                     </div>
@@ -81,8 +76,8 @@
 
             </div>
         </div>
-		
-		 <!-- top navigation -->
+
+        <!-- top navigation -->
         <div class="top_nav">
             <div class="nav_menu">
                 <nav>
@@ -94,7 +89,7 @@
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                aria-expanded="false">
-                                <img src="" alt=""><?php echo "Mr.";echo " ";echo $_SESSION["librarian"];?>
+                                <img src="images" alt=""><?php echo "Mr.";echo " ";echo $_SESSION["username"];?>
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -105,8 +100,8 @@
                         <li role="presentation" class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"
                                aria-expanded="false">
-                                <!--<i class="fa fa-envelope-o"></i>-->
-                                <span class="badge bg-green"></span>
+                                <i class="fa fa-envelope-o"></i>
+                                <span class="badge bg-green"onclick="window.location='message_from_admin.php';"><?php echo $tot;?></span>
                             </a>
 
                         </li>
